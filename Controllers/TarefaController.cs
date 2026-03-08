@@ -43,6 +43,10 @@ namespace TrilhaApiDesafio.Controllers
         {
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o titulo recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
+            if (string.IsNullOrWhiteSpace(titulo))
+            {
+                return BadRequest(new { Erro = "O título não pode ser vazio" });
+            }
             var tarefas = _context.Tarefas.Where(x => x.Titulo.Contains(titulo));
             return Ok();
         }
